@@ -8,6 +8,7 @@
     * redis-deployment
     * server-deployment
     * client-deployment
+    * worker-deployment
 * Service
     * postgres-cluster-ip-service
     * redis-cluster-ip-service
@@ -56,6 +57,15 @@ B(client-cluster-ip-service <br> client:3000)
 A -- exposed by --> B
 ```
 
+### worker dependencies
+```mermaid
+graph LR
+A(worker-deployment <br> brockmarekins/multi-k8s-worker:latest)
+B(worker)
+
+A --> B
+```
+
 ### ingress dependencies
 ```mermaid
 graph LR
@@ -75,10 +85,12 @@ B(redis:6379)
 C(server:5000)
 D(client:3000)
 E(ingress-service)
+F(worker)
 
 A -- used by --> C
 B -- used by --> C
 C -- used by --> D
 C -- exposed by --> E
 D -- exposed by --> E
+B -- used by --> F
 ```
