@@ -7,10 +7,12 @@
     * postgres-deployment
     * redis-deployment
     * server-deployment
+    * client-deployment
 * Service
     * postgres-cluster-ip-service
     * redis-cluster-ip-service
     * server-cluster-ip-service
+    * client-cluster-ip-service
 
 ## Graphs of dependencies
 
@@ -43,13 +45,24 @@ B(server-cluster-ip-service <br> server:5000)
 A -- exposed by --> B
 ```
 
+### client dependencies
+```mermaid
+graph LR
+A(client-deployment <br> brockmarekins/multi-k8s-client:latest)
+B(client-cluster-ip-service <br> client:3000)
+
+A -- exposed by --> B
+```
+
 ### application dependencies
 ```mermaid
 graph LR
 A(postgres:5432) 
 B(redis:6379)
 C(server:5000)
+D(client:3000)
 
 A -- used by --> C
 B -- used by --> C
+C -- used by --> D
 ```
