@@ -8,5 +8,6 @@
 ```mermaid
 graph LR
 A(database-persistent-volume-claim) -- used by --> B(postgres-deployment)
-B -- exposed --> C[postgres-cluster-ip-service]
+B -- exposed by --> C[postgres-cluster-ip-service]
+D(redis-deployment) -- exposed by --> E(redis-cluster-ip-service)
 ```
